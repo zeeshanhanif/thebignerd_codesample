@@ -1,8 +1,9 @@
 package com.bignerd.chap2.geoquiz;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class QuizActivity extends ActionBarActivity {
+public class QuizActivity extends Activity  {
 
 
     private static final String TAG = "QuizActivity";
@@ -41,15 +42,18 @@ public class QuizActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //requestWindowFeature(Window.FEATURE_ACTION_BAR);
+        //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+
         setContentView(R.layout.activity_quiz);
         if(savedInstanceState !=null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
         }
 
-        getSupportActionBar().setSubtitle("Hello Geo Quiz");
+        getActionBar().setSubtitle("Hello Geo Quiz");
 
 
         mTrueButton = (Button)findViewById(R.id.true_button);
