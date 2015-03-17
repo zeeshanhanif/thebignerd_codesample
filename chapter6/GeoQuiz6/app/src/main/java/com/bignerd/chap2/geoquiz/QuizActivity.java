@@ -1,22 +1,23 @@
 package com.bignerd.chap2.geoquiz;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class QuizActivity extends Activity  {
+public class QuizActivity extends Activity {
 
 
     private static final String TAG = "QuizActivity";
@@ -41,11 +42,9 @@ public class QuizActivity extends Activity  {
 
     private int mCurrentIndex = 0;
 
-
+    @TargetApi(11)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //requestWindowFeature(Window.FEATURE_ACTION_BAR);
-        //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
@@ -55,7 +54,11 @@ public class QuizActivity extends Activity  {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
         }
 
-        getActionBar().setSubtitle("Hello Geo Quiz");
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ActionBar actionBar = getActionBar();
+            // Unable to make it work
+            //actionBar.setSubtitle("Bodies of Water");
+        }
 
 
         mTrueButton = (Button)findViewById(R.id.true_button);
